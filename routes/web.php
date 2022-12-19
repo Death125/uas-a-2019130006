@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AppController;
+use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\AppController::class, 'index'])->name('home');
+Route::resource('menus', MenuController::class);
+Route::get('/order', [App\Http\Controllers\OrderController::class, 'order'])->name('order');
+Route::get('/createOrder', [App\Http\Controllers\OrderController::class, 'createOrder'])->name('createorder');
