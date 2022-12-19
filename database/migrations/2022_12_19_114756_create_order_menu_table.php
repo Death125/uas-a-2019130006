@@ -14,7 +14,9 @@ class CreateOrderMenuTable extends Migration
     public function up()
     {
         Schema::create('order_menu', function (Blueprint $table) {
-            $table->id();
+            $table->integer('order_id');
+            $table->char('menu_id', 6);
+            $table->integer('quantity');
             $table->timestamps();
         });
     }
