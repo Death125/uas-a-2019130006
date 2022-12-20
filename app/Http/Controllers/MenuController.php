@@ -14,7 +14,8 @@ class MenuController extends Controller
      */
     public function index()
     {
-        return view('menus.index');
+        $menus = Menu::all();
+        return view('menus.index', compact('menus'));
     }
 
     /**
@@ -35,7 +36,16 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'id' => 'required|unique:menus,id|max:6',
+            'nama' => 'required',
+            'rekomendasi' => 'required|numeric|min:0|max:1',
+            'harga' => 'required|numeric|min:0'
+        ]);
+
+        Menu::create($validateData);
+        $request->session()->flash('success', "Successfully adding {$validateData['nama']}!");
+        return redirect()->route('menus.index');
     }
 
     /**
@@ -46,7 +56,7 @@ class MenuController extends Controller
      */
     public function show(Menu $menu)
     {
-        //
+        return view('menus.show', compact('menu'));
     }
 
     /**
@@ -57,7 +67,7 @@ class MenuController extends Controller
      */
     public function edit(Menu $menu)
     {
-        //
+        return view('menus.edit', compact('menu'));
     }
 
     /**
@@ -69,7 +79,18 @@ class MenuController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
-        //
+        $validateData = $request->validate([
+            'id' => 'required|max:6',
+            'nama' => 'required',
+            'rekomendasi' => 'required|numeric|min:0|max:1',
+            'harga' => 'required|numeric|min:0'
+        ]);
+
+        $menu->update($validateData);
+
+        $request->session()
+            ->flash('success', "Successfully updating {$validateData['nama']}!");
+        return redirect()->route('menus.index');
     }
 
     /**
@@ -80,6 +101,10 @@ class MenuController extends Controller
      */
     public function destroy(Menu $menu)
     {
-        //
+        $menu->delete();
+        return redirect()->route('menus.index')->with(
+            'success',
+            "Successfully deleting {$menu['nama']}!"
+        );
     }
 }

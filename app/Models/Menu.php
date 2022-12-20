@@ -9,6 +9,7 @@ class Menu extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public $incrementing =false;
 
     public function order_menu(){
         return $this->hasMany('\App\Models\order_menu');
