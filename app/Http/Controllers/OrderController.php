@@ -8,7 +8,7 @@ class OrderController extends Controller
 {
     public function order()
     {
-        return "ORDER";
+        return view('order');
     }
 
     public function createOrder()

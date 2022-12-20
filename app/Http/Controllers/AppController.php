@@ -8,6 +8,6 @@ class AppController extends Controller
 {
     public function index()
     {
-        return "INDEX OK";
+        return view('index');
     }
 }

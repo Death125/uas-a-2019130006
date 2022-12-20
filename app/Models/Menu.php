@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Menu extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+
+    public function order_menu(){
+        return $this->hasMany('\App\Models\order_menu');
+    }
 }
