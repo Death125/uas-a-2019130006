@@ -17,6 +17,9 @@
     </style>
 @endpush
 
+@section('carousel')
+@endsection
+
 @section('content')
     @if (session()->has('success'))
         <div class="alert alert-success" role="alert">
@@ -77,17 +80,19 @@
             </table>
         </div>
     </div>
-@endsection
 
-@push('js_after')
-    <script>
-        const formatter = new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'IDR'
-        });
-        const elements = document.querySelectorAll('.price');
-        [...elements].forEach((element) => {
-            element.innerHTML = formatter.format(element.innerHTML);
-        });
-    </script>
-@endpush
+    @push('js_after')
+        <script>
+            const formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'IDR'
+            });
+            const elements = document.querySelectorAll('.price');
+            [...elements].forEach((element) => {
+                element.innerHTML = formatter.format(element.innerHTML);
+            });
+        </script>
+    @endpush
+
+
+@endsection

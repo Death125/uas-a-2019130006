@@ -1,6 +1,9 @@
 @extends('layouts.master')
 @section('title', 'Home')
 
+@section('carousel')
+@endsection
+
 @section('content')
     <div class="col-md-12">
         <div class="row">

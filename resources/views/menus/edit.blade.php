@@ -1,6 +1,9 @@
 @extends('layouts.master')
 @section('title', 'Add New Menu')
 
+@section('carousel')
+@endsection
+
 @section('content')
     <form action="{{ route('menus.update', ['menu' => $menu->id]) }}" method="POST">
         @csrf

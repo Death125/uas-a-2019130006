@@ -19,3 +19,4 @@ Route::get('/', [App\Http\Controllers\AppController::class, 'index'])->name('hom
 Route::resource('menus', MenuController::class);
 Route::get('/order', [App\Http\Controllers\OrderController::class, 'order'])->name('order');
 Route::post('/order', [App\Http\Controllers\OrderController::class, 'createOrder'])->name('createOrder');
+Route::get('/findMenuPrice', [App\Http\Controllers\OrderController::class, 'findMenuPrice'])->name('findMenuPrice');

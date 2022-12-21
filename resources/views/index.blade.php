@@ -30,7 +30,17 @@
     </style>
 @endpush
 
+@section('carousel')
+    @parent
+@endsection
+
 @section('content')
+    @if (session()->has('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+
     {{-- Introduction --}}
     <div class="py-2 text-center container">
         <div class="row py-lg-5">
@@ -39,6 +49,17 @@
                 <p class="lead text-muted font-lucida"> There are so many choices of food and drinks that you can try at
                     affordable
                     prices. What are you waiting for ? let's order now!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-6 mb-3 font-lucida">
+                <h5> Total Our Menu : {{ $menus }}</h5>
+            </div>
+            <div class="col-6 mb-3 font-lucida">
+                <h5>Total Order : {{ $orders }}</h5>
             </div>
         </div>
     </div>
@@ -61,26 +82,13 @@
 
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-3 d-flex align-items-stretch">
                 <div class="card">
-                    <img class="card-img-top" src="{{ asset('assets/images/menu.jpg') }}" alt="Card image cap">
+                    <img class="card-img-top" src="{{ asset('assets/images/menu2.png') }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">Order</h5>
-                        <p class="card-text text-justify">Dont forget to order.</p>
+                        <p class="card-text text-justify">Don't forget to order food and drinks at our restaurant :)</p>
                         <a href="{{ route('order') }}" class="btn btn-primary">Order</a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container1">
-        <img class="jbg-color" src="{{ asset('assets/images/jbg.png') }}" height="280" width="100%" alt="rigged">
-
-        <div class="row">
-            <div class="centered font-lucida">
-                <p><b>OPENING TIMES</b></p>
-                <p>Monday - Friday : 09:00 - 23:00</p>
-                <p>Saturday : 10:00 - 22:00</p>
-                <p>Sunday : 12:00 - 21:00</p>
             </div>
         </div>
     </div>
