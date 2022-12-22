@@ -9,6 +9,7 @@ class Order_menu extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $table = 'order_menu';
 
     public function menu()
     {

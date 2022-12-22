@@ -25,6 +25,8 @@
                     href="{{ route('menus.index') }}">Menu<span class="sr-only">(current)</span></a>
                 <a class="nav-link {{ Route::is('order') ? 'active' : '' }}" href="{{ route('order') }}">Order<span
                         class="sr-only">(current)</span></a>
+                <a class="nav-link {{ Route::is('detailOrder') ? 'active' : '' }}"
+                    href="{{ route('detailOrder') }}">Detail Order<span class="sr-only">(current)</span></a>
             </div>
         </div>
     </nav>
@@ -73,8 +75,7 @@
 
     {{-- Footer  --}}
     <footer
-        class="bg-dark text-center text-white {{ Route::is('order') ? 'fixed-bottom' : '' }} {{ Route::is('menus.show') ? 'fixed-bottom' : '' }}
-         {{ Route::is('menus.create') ? 'fixed-bottom' : '' }} {{ Route::is('menus.edit') ? 'fixed-bottom' : '' }}">
+        class="bg-dark text-center text-white {{ Route::is('order') ? 'fixed-bottom' : '' }} {{ Route::is('menus.show') ? 'fixed-bottom' : '' }}">
         <div class="container p-4">
             {{-- Join our --}}
             <section class="mb-4">

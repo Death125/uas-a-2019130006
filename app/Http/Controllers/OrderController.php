@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Menu;
 use App\Models\Order;
 use App\Models\Order_menu;
+use Facade\Ignition\DumpRecorder\Dump;
 use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
@@ -42,19 +43,34 @@ class OrderController extends Controller
 
         $validator = Validator::make($request->all(), $rules, $error_message);
 
-        // $validated = $request->only(['status']);
-        // $validated2 = $request->only(['quantity']);
-
-
-        // Order_menu::create($validated2);
+        $validated = $request->only(['status']);
+        $getQuantity = $request->only(['quantity']);
+        $getId = $request->only(['menu_id']);
 
         if ($validator->fails()) {
             return redirect('/order')->withErrors($validator)->withInput();
         } else {
-            //   Order::create($validated);
+            $quantity = json_encode($getQuantity);
+            $quantity = json_decode($quantity, true);
+
+            $order = Order::create($validated);
+            $menu = Menu::find($getId)->first();
+
+            $order_menu = new Order_menu();
+
+            $order_menu->order()->associate($order);
+            $order_menu->menu()->associate($menu);
+            $order_menu->quantity = $quantity['quantity'];
+            $order_menu->save();
 
             $request->session()->flash('success', "Successfully adding New Order!");
             return redirect()->route('home');
         }
+    }
+
+    public function detailOrder()
+    {
+        $order_menus = Order_menu::all();
+        return view('detail_order', compact('order_menus'));
     }
 }

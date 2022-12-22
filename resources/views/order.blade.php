@@ -75,6 +75,10 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
         <script>
+            var id = document.getElementById('menu_id').value;
+        </script>
+
+        <script>
             var quantity = document.getElementById('quantity').value;
 
             $(document).ready(function() {
