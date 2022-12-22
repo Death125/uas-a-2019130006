@@ -13,8 +13,8 @@
             <div class="row">
                 <div class="col-md-12 mb-3">
                     <label for="id">Id</label>
-                    <input type="text" class="form-control @error('id') is-invalid @enderror" name="id" id="id"
-                        value="{{ old('id') }}">
+                    <input maxlength="6" type="text" class="form-control @error('id') is-invalid @enderror" name="id"
+                        id="id" value="{{ old('id') }}">
                     @error('id')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror

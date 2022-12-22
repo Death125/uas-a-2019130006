@@ -28,7 +28,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6 mt-3 mb-3">
+                <div class="col-md-8 mt-3 mb-3">
                     <select class="menuName" style="width:100%;height: 50px;" name="menu_id" id="menu_id">
                         <option disabled selected>Pilih Menu yang anda inginkan</option>
 
@@ -47,11 +47,20 @@
                     @enderror
                 </div>
 
-                <div class="col-md-6 mb-3">
+                <div class="col-md-4 mb-3">
                     <label for="quantity">Quantity</label>
                     <input type="text" class="form-control @error('quantity') is-invalid @enderror" name="quantity"
                         min="1" id='quantity' value="{{ old('quantity') }}">
                     @error('quantity')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="rekomendasi">Rekomendasi</label>
+                    <input type="text" class="form-control @error('rekomendasi') is-invalid @enderror" name="rekomendasi"
+                        min="1" id='rekomendasi' value="" readonly>
+                    @error('rekomendasi')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
@@ -75,12 +84,18 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
         <script>
-            var id = document.getElementById('menu_id').value;
+            $(document).ready(function() {
+                $(document).on('change', '.quantity', function() {
+                    var id = document.getElementById('menu_id').value;
+
+                    console.log(id);
+
+
+                })
+            })
         </script>
 
         <script>
-            var quantity = document.getElementById('quantity').value;
-
             $(document).ready(function() {
                 $(document).on('change', '.menuName', function() {
                     //  console.log('change');
@@ -88,6 +103,7 @@
 
                     var menuId = $(this).val();
                     var price = $(this).parent().parent().parent();
+
                     quantity = document.getElementById('quantity').value;
                     let ppn = 0.11;
 

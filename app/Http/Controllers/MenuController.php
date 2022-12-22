@@ -37,7 +37,7 @@ class MenuController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'id' => 'required|unique:menus,id|max:6',
+            'id' => 'required|regex:/^[A-Za-z]{3}\d{3}$/|unique:menus,id|max:6',
             'nama' => 'required',
             'rekomendasi' => 'required|numeric|min:0|max:1',
             'harga' => 'required|numeric|min:0'

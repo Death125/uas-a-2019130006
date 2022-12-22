@@ -45,7 +45,7 @@
 
             <table style="table-layout: fixed;width: 100%" class="table table-striped table-success table-hover">
                 <thead>
-                    <tr>
+                    <tr class="text-center">
                         <th>#</th>
                         <th>Id</th>
                         <th>Nama</th>
@@ -55,7 +55,7 @@
                 </thead>
                 <tbody>
                     @forelse ($menus as $menu)
-                        <tr>
+                        <tr class="text-center">
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td><a class="text" href="{{ route('menus.show', $menu->id) }}">
                                     {{ $menu->id }}

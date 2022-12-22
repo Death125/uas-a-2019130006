@@ -74,8 +74,7 @@
     {{-- Content END --}}
 
     {{-- Footer  --}}
-    <footer
-        class="bg-dark text-center text-white {{ Route::is('order') ? 'fixed-bottom' : '' }} {{ Route::is('menus.show') ? 'fixed-bottom' : '' }}">
+    <footer class="bg-dark text-center text-white  {{ Route::is('menus.show') ? 'fixed-bottom' : '' }}">
         <div class="container p-4">
             {{-- Join our --}}
             <section class="mb-4">

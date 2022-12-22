@@ -43,7 +43,6 @@ class DatabaseSeeder extends Seeder
         }
 
         for ($i = 0; $i < 5; $i++) {
-
             Order::create([
                 'id' => $faker->numberBetween(0, 5),
                 'status' => $faker->randomElement(['Selesai', 'Menunggu Pembayaran']),
