@@ -34,12 +34,19 @@
 
                         @foreach ($menu as $menus)
                             @if (old('menu_id') == $menus->id)
-                                <option value="{{ $menus->id }}" selected>{{ $menus->nama }}</option>
+                                <option value="{{ $menus->id }}" selected>{{ $menus->nama }}
+                                    @if ($menus->rekomendasi == 1)
+                                        (Di rekomendasikan)
+                                    @endif
+                                </option>
                             @else
-                                <option value="{{ $menus->id }}">{{ $menus->nama }}</option>
+                                <option value="{{ $menus->id }}">{{ $menus->nama }}
+                                    @if ($menus->rekomendasi == 1)
+                                        (Di rekomendasikan)
+                                    @endif
+                                </option>
                             @endif
                         @endforeach
-
                     </select>
 
                     @error('menu_id')
@@ -49,26 +56,18 @@
 
                 <div class="col-md-4 mb-3">
                     <label for="quantity">Quantity</label>
-                    <input type="text" class="form-control @error('quantity') is-invalid @enderror" name="quantity"
-                        min="1" id='quantity' value="{{ old('quantity') }}">
+                    <input type="number" class="quantity form-control @error('quantity') is-invalid @enderror"
+                        name="quantity" min="1" id='quantity' value="{{ old('quantity') }}">
                     @error('quantity')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
 
-                <div class="col-md-6 mb-3">
-                    <label for="rekomendasi">Rekomendasi</label>
-                    <input type="text" class="form-control @error('rekomendasi') is-invalid @enderror" name="rekomendasi"
-                        min="1" id='rekomendasi' value="" readonly>
-                    @error('rekomendasi')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
             </div>
 
             <div class="row mb-3 mt-3">
                 <div class="col">
-                    <h3 class='totalPrice'></h3>
+                    <h3>Total harga yang harus dibayar adalah : <span class="totalPrice"></span></h3>
                 </div>
             </div>
 
@@ -85,32 +84,20 @@
 
         <script>
             $(document).ready(function() {
-                $(document).on('change', '.quantity', function() {
-                    var id = document.getElementById('menu_id').value;
-
-                    console.log(id);
-
-
-                })
-            })
-        </script>
-
-        <script>
-            $(document).ready(function() {
                 $(document).on('change', '.menuName', function() {
                     //  console.log('change');
                     // console.log(id);
 
                     var menuId = $(this).val();
                     var price = $(this).parent().parent().parent();
-
-                    quantity = document.getElementById('quantity').value;
                     let ppn = 0.11;
 
                     const formatter = new Intl.NumberFormat('en-US', {
                         style: 'currency',
                         currency: 'IDR'
                     });
+
+                    var quantity = document.getElementById('quantity').value;
 
                     $.ajax({
                         type: 'get',
@@ -120,13 +107,15 @@
                         },
                         dataType: 'json',
                         success: function(data) {
-                            //  console.log("price");
+                            // console.log("price");
                             // console.log(data.harga);
-                            var totalPrice = (data.harga * quantity) + ppn * (data.harga *
-                                quantity);
 
-                            price.find('.totalPrice').html("Total harga yang harus dibayar : " +
-                                formatter.format(totalPrice));
+                            var totalPrice = (data.harga * quantity) + ppn *
+                                (data.harga *
+                                    quantity);
+
+                            price.find('.totalPrice').html(formatter.format(
+                                totalPrice));
 
                             // console.log(quantity);
                         },
@@ -135,6 +124,36 @@
                         }
 
                     });
+
+                    $(document).ready(function() {
+                        $(document).on('change', '.quantity', function() {
+                            var quantity = document.getElementById('quantity').value;
+
+                            $.ajax({
+                                type: 'get',
+                                url: '{!! URL::to('findMenuPrice') !!}',
+                                data: {
+                                    'id': menuId,
+                                },
+                                dataType: 'json',
+                                success: function(data) {
+                                    var totalPrice = (data.harga * quantity) +
+                                        ppn *
+                                        (data.harga *
+                                            quantity);
+
+                                    price.find('.totalPrice').html(formatter
+                                        .format(
+                                            totalPrice));
+
+                                },
+                                error: function() {
+                                    console.log('error');
+                                }
+                            });
+
+                        })
+                    })
                 });
             });
         </script>

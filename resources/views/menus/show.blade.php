@@ -26,7 +26,20 @@
         </div>
         <hr>
 
-        <p class="lead">Rekomendasi : {{ $menu->rekomendasi }}</p>
+        <h5>
+            <span class="badge badge-primary">
+                <i class="fa fa-star fa-fw"></i>
+                ID :
+                {{ $menu->id }}
+            </span>
+        </h5>
+
+        <p class="lead">Rekomendasi : @if ($menu->rekomendasi == 1)
+                Yes
+            @else
+                No
+            @endif
+        </p>
         <p class="lead">Harga : <span class="price">{{ $menu->harga }}</span></p>
     </div>
 @endsection

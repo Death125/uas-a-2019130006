@@ -14,7 +14,8 @@
                 <div class="col-md-12 mb-3">
                     <label for="id">Id</label>
                     <input maxlength="6" type="text" class="form-control @error('id') is-invalid @enderror" name="id"
-                        id="id" value="{{ old('id') }}">
+                        placeholder="Enter the first three letters of the menu category and 3 random numbers" id="id"
+                        value="{{ old('id') }}">
                     @error('id')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -25,7 +26,7 @@
                 <div class="col-md-12 mb-3">
                     <label for="nama">Nama</label>
                     <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
-                        id="nama" value="{{ old('nama') }}">
+                        placeholder="Name of the menu" id="nama" value="{{ old('nama') }}">
                     @error('nama')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -48,7 +49,7 @@
                 <div class="col-md-12 mb-3">
                     <label for="harga">Harga</label>
                     <input type="text" class="form-control @error('harga') is-invalid @enderror" name="harga"
-                        id="harga" value="{{ old('harga') }}">
+                        placeholder="> 0" id="harga" value="{{ old('harga') }}">
                     @error('harga')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror

@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             //regex(['[0-9]{3}'])
 
             Menu::create([
-                'id' => $faker->unique()->regexify('[A]{1}[0]{2}[0-9]{1}'),
+                'id' => $faker->unique()->regexify('[A-Z]{3}[0-9]{3}'),
                 'nama' => $faker->randomElement([
                     'Chicken', 'Bacon', 'Sausage', 'Strawberry', 'Orange',
                     'Pineapple', 'Cheese Pizza', 'Hamburger', 'Cheeseburger'

@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Menu;
 use App\Models\Order;
 use App\Models\Order_menu;
-use Facade\Ignition\DumpRecorder\Dump;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
@@ -15,8 +13,8 @@ class OrderController extends Controller
     public function order(Request $request)
     {
         $menu = Menu::all();
-
-        return view('order', compact('menu'));
+        $menuRekomendasi = Menu::select('nama')->where('rekomendasi', '=', 1)->get();
+        return view('order', compact('menu', 'menuRekomendasi'));
     }
 
     public function findMenuPrice(Request $request)
