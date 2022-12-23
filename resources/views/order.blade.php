@@ -91,6 +91,7 @@
                     var menuId = $(this).val();
                     var price = $(this).parent().parent().parent();
                     let ppn = 0.11;
+                    let diskon = 0.10;
 
                     const formatter = new Intl.NumberFormat('en-US', {
                         style: 'currency',
@@ -110,9 +111,15 @@
                             // console.log("price");
                             // console.log(data.harga);
 
-                            var totalPrice = (data.harga * quantity) + ppn *
-                                (data.harga *
-                                    quantity);
+                            if (data.rekomendasi == 0) {
+                                var totalPrice = (data.harga * quantity) + ppn *
+                                    (data.harga *
+                                        quantity);
+                            } else {
+                                var totalPrice = (data.harga * quantity) + (ppn *
+                                    (data.harga *
+                                        quantity)) - (diskon * (data.harga * quantity));
+                            }
 
                             price.find('.totalPrice').html(formatter.format(
                                 totalPrice));
@@ -137,10 +144,20 @@
                                 },
                                 dataType: 'json',
                                 success: function(data) {
-                                    var totalPrice = (data.harga * quantity) +
-                                        ppn *
-                                        (data.harga *
-                                            quantity);
+
+                                    if (data.rekomendasi == 0) {
+                                        var totalPrice = (data.harga * quantity) +
+                                            ppn *
+                                            (data.harga *
+                                                quantity);
+                                    } else {
+                                        var totalPrice = (data.harga * quantity) + (
+                                            ppn *
+                                            (data.harga *
+                                                quantity)) - (diskon * (data
+                                            .harga * quantity));
+                                    }
+
 
                                     price.find('.totalPrice').html(formatter
                                         .format(

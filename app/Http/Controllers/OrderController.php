@@ -13,13 +13,12 @@ class OrderController extends Controller
     public function order(Request $request)
     {
         $menu = Menu::all();
-        $menuRekomendasi = Menu::select('nama')->where('rekomendasi', '=', 1)->get();
-        return view('order', compact('menu', 'menuRekomendasi'));
+        return view('order', compact('menu'));
     }
 
     public function findMenuPrice(Request $request)
     {
-        $menuPrice = Menu::select('harga')->where('id', $request->id)->first();
+        $menuPrice = Menu::select('harga', 'rekomendasi')->where('id', $request->id)->first();
 
         return response()->json($menuPrice);
     }
